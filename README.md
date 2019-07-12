@@ -9,6 +9,7 @@ const authed = new authed({
     secret: "",
 });
 
+## Examples
 authed.login("authed@example.com", "example", function(response) {
     console.log(response);
 });
