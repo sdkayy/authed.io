@@ -1,5 +1,8 @@
 # Authed.io API wrapper
 
+## Discord
+[discord](https://discord.gg/sxVvkMS)
+
 ```js
 const client = require("authed.io");
 ```
@@ -22,6 +25,6 @@ authed.login("authed@example.com", "example", function(response) {
 
 ```js
 authed.register("authed@example.com", "example", "license", function(response) {
-        console.log(response);;
+        console.log(response);
 });
 ```
