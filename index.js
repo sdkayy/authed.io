@@ -1,29 +1,20 @@
 "use strict";
 
 // Libraries
-const authed = require("./lib/authed.js");
-const prompt = require("prompts");
+const client = require("./lib/authed.js");
 
 // Variables
-var questions = [{
-        type: "text",
-        name: "email",
-        message: "Email:"
-    },
-    {
-        type: "text",
-        name: "password",
-        message: "Password:"
-    }
-];
+const authed = new authed({
+    id: "",
+    token: "",
+    secret: "",
+});
 
-async function login() {
-    const output = await prompt(questions);
+authed.login("authed@example.com", "example", function(response) {
+    console.log(response);
+});
 
-    if (!output.email && !output.password)
-        return console.log("[-] Invalid email or password");
-
-    authed.main(output.email, output.password);
-}
-
-login();
+// set license to null if app in free mode 
+authed.register("authed@example.com", "example", "license", function(response) {
+    console.log(response);
+});
