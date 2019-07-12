@@ -1,6 +1,6 @@
 # Authed.io API wrapper
 
-const client = require("authed.io");
+    const client = require("authed.io");
 
 ## Set up API credentials
     const authed = new authed({
