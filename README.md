@@ -14,7 +14,6 @@ const client = require("authed.io");
         console.log(response);
     });
 
-// set license to null if app in free mode 
     authed.register("authed@example.com", "example", "license", function(response) {
         console.log(response);
     });
