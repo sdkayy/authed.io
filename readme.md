@@ -1,6 +1,7 @@
 # Authed.io API wrapper
 
-    const client = require("authed.io");
+```js
+const client = require("authed.io");
 
 ## Set up API credentials
 ```js
@@ -16,6 +17,7 @@ authed.login("authed@example.com", "example", function(response) {
         console.log(response);
 });
 
-    authed.register("authed@example.com", "example", "license", function(response) {
+```js
+authed.register("authed@example.com", "example", "license", function(response) {
         console.log(response);
-    });
+});
