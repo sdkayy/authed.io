@@ -1,5 +1,5 @@
 # Authed.io API wrapper
-[Discord](https://discord.gg/sxVvkMSS)
+[Discord](https://discord.gg/sxVvkMS)
 
 ```js
 const client = require("authed.io");
