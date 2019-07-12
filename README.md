@@ -3,18 +3,18 @@
 const client = require("authed.io");
 
 ## Set up API credentials
-const authed = new authed({
-    id: "",
-    token: "",
-    secret: "",
-});
+    const authed = new authed({
+        id: "",
+        token: "",
+        secret: "",
+    });
 
 ## Examples
-authed.login("authed@example.com", "example", function(response) {
-    console.log(response);
-});
+    authed.login("authed@example.com", "example", function(response) {
+        console.log(response);
+    });
 
 // set license to null if app in free mode 
-authed.register("authed@example.com", "example", "license", function(response) {
-    console.log(response);
-});
+    authed.register("authed@example.com", "example", "license", function(response) {
+        console.log(response);
+    });
