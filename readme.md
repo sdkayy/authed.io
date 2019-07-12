@@ -3,11 +3,12 @@
     const client = require("authed.io");
 
 ## Set up API credentials
-    const authed = new authed({
+```js
+const authed = new authed({
         id: "",
         token: "",
         secret: "",
-    });
+});```
 
 ## Examples
     authed.login("authed@example.com", "example", function(response) {
