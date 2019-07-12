@@ -1,9 +1,8 @@
-"use strict";
+# Authed.io API wrapper
 
-// Libraries
-const client = require("./lib/authed.js");
+const client = require("authed.io");
 
-// Variables
+## Set up API credentials
 const authed = new authed({
     id: "",
     token: "",
