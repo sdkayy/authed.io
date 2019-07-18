@@ -46,64 +46,126 @@ authed.prototype.authorize = function() {
 }
 
 authed.prototype.login = function(email, password, callback) {
-    this.authorize().then((session) => {
-        request({
-            json: true,
-            method: "POST",
-            url: "https://api.authed.io/app/login",
-            headers: {
-                "session": session
-            },
-            body: {
-                "email": email,
-                "password": password
-            }
-        }, function(error, response, body) {
-            if (error)
-                return callback(error);
+    if (!email) {
+        console.log("Invalid email.");
+        process.exit(1);
+    } else if (!password) {
+        console.log("Invalid password.");
+        process.exit(1);
+    } else {
+        this.authorize().then(session => {
+            request({
+                json: true,
+                method: "POST",
+                url: "https://api.authed.io/app/login",
+                headers: {
+                    "session": session
+                },
+                body: {
+                    "email": email,
+                    "password": password
+                }
+            }, function(error, response, body) {
+                if (error)
+                    return callback(error);
 
-            if (response.statusCode == 200)
-                callback(body);
-            else if (response.statusCode == 500)
-                callback("An error has occured");
-            else
-                callback(body);
+                if (response.statusCode == 200)
+                    callback(body);
+                else if (response.statusCode == 500)
+                    callback("An error has occured");
+                else
+                    callback(body);
 
-        });
-    }).catch(console.error);
+            });
+        }).catch(console.error);
+    }
 }
 
 authed.prototype.register = function(email, password, code, callback) {
-    let license = null;
+    if (!email) {
+        console.log("Invalid email.");
+        process.exit(1);
+    } else if (!password) {
+        console.log("Invalid password.");
+        process.exit(1);
+    } else {
+        let license = null;
 
-    if (code && code.length >= 1)
-        license += code;
+        if (code && code.length >= 1)
+            license += code;
 
-    this.authorize().then(function(session) {
-        request({
-            json: true,
-            method: "POST",
-            url: "https://api.authed.io/app/register",
-            headers: {
-                "session": session
-            },
-            body: {
-                "email": email,
-                "password": password,
-                "licenseCode": code
-            }
-        }, function(error, response, body) {
-            if (error)
-                return console.log(error);
+        this.authorize().then(session => {
+            request({
+                json: true,
+                method: "POST",
+                url: "https://api.authed.io/app/register",
+                headers: {
+                    "session": session
+                },
+                body: {
+                    "email": email,
+                    "password": password,
+                    "licenseCode": code
+                }
+            }, function(error, response, body) {
+                if (error)
+                    return console.log(error);
 
-            if (response.statusCode == 200) {
-                callback(body);
-            } else if (response.statusCode == 500)
-                callback("[-] An error has occured");
+                if (response.statusCode == 200) {
+                    callback(body);
+                } else if (response.statusCode == 500)
+                    callback("[-] An error has occured");
+            });
+        }, function(error) {
+            callback(error);
         });
-    }, function(error) {
-        callback(error);
-    });
+    }
+}
+
+authed.prototype.generateLicence = function(prefix, level, time, amount, callback) {
+    if (!prefix)
+        prefix = null;
+    else if (!level) {
+        console.log("Invalid level.");
+        process.exit(1);
+    } else if (time < 0 && !time) {
+        console.log("Invalid time.");
+        process.exit(1);
+    } else if (!amount) {
+        console.log("Invalid amount.");
+        process.exit(1);
+    } else if (amount > 50) {
+        console.log("Please enter an amount below 50.");
+        process.exit(1);
+    } else {
+        this.authorize().then(session => {
+            request({
+                json: true,
+                method: "POST",
+                url: "https://api.authed.io/app/generate/license",
+                headers: {
+                    "session": session
+                },
+                body: {
+                    "secret": this.secret,
+                    "prefix": prefix,
+                    "level": level,
+                    "time": time,
+                    "amount": amount
+                }
+            }, function(error, response, body) {
+                if (error)
+                    return console.log(error);
+
+                if (response.statusCode == 200) {
+                    callback(body);
+                } else if (response.statusCode == 500)
+                    callback("[-] An error has occured");
+            });
+        }, function(error) {
+            callback(error);
+        });
+    }
 }
 
 module.exports = authed;
