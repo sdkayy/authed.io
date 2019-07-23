@@ -1,0 +1,23 @@
+{
+  "name": "authed.io",
+  "version": "1.0.0",
+  "description": "Authed.io NodeJS wrapper",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/expectations/authed.io.git"
+  },
+  "keywords": [
+    "authed",
+    "authed.io"
+  ],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/expectations/authed.io/issues"
+  },
+  "homepage": "https://github.com/expectations/authed.io#readme"
+}
